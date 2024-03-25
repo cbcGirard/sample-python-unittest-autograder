@@ -2,7 +2,13 @@
 
 # Set up autograder files
 
-EXPECTED_FILES="labxx.py"
+# Set the Python version to use
+. py-version.sh .
+
+echo "Using Python version $PY_VERSION"
+
+# For multiple files, use a space-separated list in quotes
+EXPECTED_FILES="labxx.py hello.py"
 
 if [ "$#" -eq 1 ]; then
     SUBMISSION_SOURCE=`pwd`/$1
@@ -41,10 +47,20 @@ for f in $EXPECTED_FILES; do
 done
 
 rm -f results.json
-python3 run_tests.py > results.json
+python${PY_VERSION} run_tests.py > results.json
 
 if [ -d /autograder/results ]; then
     cp -v results.json /autograder/results
 fi
+
+# debugging scratchpad
+if [ -f info.txt ]; then
+    echo "Additional information\n\n"
+
+    cat info.txt
+
+fi
+
+
 
 cd ..

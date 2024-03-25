@@ -1,3 +1,11 @@
+> CBCG modifications
+> 
+> Quasi-reasonable additions for testing `input`/`print`-based programs, spoofing stdin
+> 
+> Sub-class `lib_text_handler.TestText` for these cases
+> 
+> Initial attempts to install and use specific Python version for grading not yet successful, but should fail gracefully
+
 # sample-python-unittest-autograder
 
 A simple Gradescope autograder for Python based on `unittest` test cases.
@@ -75,6 +83,7 @@ You are now ready to test your autograded assignment.
 As quick reference, here are examples of the decorators you can use on `unittest` tests:
    
 * `@weight(5.0)` (parameter is of type float; represents number of points)
+* `@
 * `@tags("conditionals", "recursion")` (parameters are strings)
 * `@visibility("after_due_date")` Legal values are explained [in Gradescope's documentation](https://gradescope-autograders.readthedocs.io/en/latest/specs/#controlling-test-case-visibility)
    * `"hidden"`

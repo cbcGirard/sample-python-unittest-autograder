@@ -4,7 +4,7 @@
 
 import unittest
 import pytest
-from gradescope_utils.autograder_utils.decorators import weight,visibility
+from gradescope_utils.autograder_utils.decorators import weight,visibility, partial_credit, number
 
 from labxx import *
 
@@ -33,3 +33,23 @@ class TestConversion(unittest.TestCase):
   def test_addEm_2(self):
     self.assertEqual(addEm(3,1),4)
     
+  # This one is worth 10 points, but is only worth 5 if they get it wrong
+  # It is also hidden until after the due date
+
+  @visibility('after_due_date')
+  @partial_credit(20)
+  def test_addEm_3(self, set_score = None):
+    
+    inputs = [(2,2),(3,3),(4,4),(5,5)]
+    outputs = [4,6,8,10]
+
+    score = 0
+    for vin, vout in zip(inputs, outputs):
+      try:
+        if addEm(*vin) == vout:
+          score += 5
+      except:
+        pass
+      finally:
+        if set_score:
+          set_score(score)
